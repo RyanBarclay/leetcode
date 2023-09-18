@@ -1,15 +1,31 @@
-function longestPalindrome(s: string): string {}
+function longestPalindrome(s: string): string {
+  let result = "";
 
-const isPalindrome = (s: string): boolean => {
-  // reverse string
-  let s_rev: string = "";
-  for (let index = s.length - 1; index >= 0; index--) {
-    s_rev = s_rev + s[index];
+  for (let i = 0; i < s.length; i++) {
+    let j = i;
+    let k = i;
+
+    while (j >= 0 && k < s.length && s[j] === s[k]) {
+      j--;
+      k++;
+    }
+
+    if (k - j - 1 > result.length) {
+      result = s.substring(j + 1, k);
+    }
+
+    j = i;
+    k = i + 1;
+
+    while (j >= 0 && k < s.length && s[j] === s[k]) {
+      j--;
+      k++;
+    }
+
+    if (k - j - 1 > result.length) {
+      result = s.substring(j + 1, k);
+    }
   }
 
-  if (s_rev == s) {
-    return true;
-  } else {
-    return false;
-  }
-};
+  return result;
+}
